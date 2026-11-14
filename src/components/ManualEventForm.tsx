@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { assertFutureEvent } from '../utils/event-date'
 import type { NoticeChatSummary } from '../types/api'
 
 export function ManualEventForm({ disabled, onSubmit }: { disabled: boolean; onSubmit: (summary: NoticeChatSummary) => void }) {
@@ -10,6 +11,8 @@ export function ManualEventForm({ disabled, onSubmit }: { disabled: boolean; onS
     const minCapacity = Number(form.get('minimum'))
     const eventAt = String(form.get('eventAt'))
     const applyDeadline = String(form.get('deadline'))
+    try { assertFutureEvent(eventAt + ':00') }
+    catch (cause) { setError(cause instanceof Error ? cause.message : '행사 일시를 확인해 주세요.'); return }
     if (minCapacity > capacity || new Date(applyDeadline) >= new Date(eventAt)) { setError('최소 인원은 정원 이하, 신청 마감은 행사 일시 이전이어야 해요.'); return }
     setError('')
     onSubmit({ title: String(form.get('title')), eventAt: eventAt + ':00', location: String(form.get('location')), capacity, minCapacity, applyDeadline: applyDeadline + ':00', extraQuestions: String(form.get('questions')).split(',').map((value) => value.trim()).filter(Boolean), description: String(form.get('description')) })

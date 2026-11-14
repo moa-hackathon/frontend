@@ -1,4 +1,5 @@
 import type * as T from '../types/api'
+import { assertFutureEvent } from '../utils/event-date'
 
 export const API_BASE = (import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '/moa-api' : 'https://moa-backend-b68k.onrender.com')).replace(/\/$/, '')
 export function getInviteCode() { return sessionStorage.getItem('moa-invite-code') || import.meta.env.VITE_INVITE_CODE || '' }
@@ -28,7 +29,10 @@ export const api = {
   applications: (id: number, filter = 'ALL') => apiRequest<T.ApplicationListResponse>(`/api/events/${id}/applications?filter=${encodeURIComponent(filter)}`),
   chat: (body: { messages: T.NoticeChatMessage[]; summary?: T.NoticeChatSummary; selectedExtraQuestions?: string[] }) => apiRequest<T.NoticeChatResponse>('/api/notices/chat', json('POST', body)),
   draft: (body: T.NoticeChatSummary & { previousDraft?: string; revisionRequest?: string }) => apiRequest<T.NoticeDraftResponse>('/api/notices/draft', json('POST', body)),
-  createEvent: (body: T.NoticeChatSummary & { noticeText: string }) => apiRequest<T.EventCreateResponse>('/api/events', json('POST', body)),
+  createEvent: (body: T.NoticeChatSummary & { noticeText: string }) => {
+    assertFutureEvent(body.eventAt)
+    return apiRequest<T.EventCreateResponse>('/api/events', json('POST', body))
+  },
   formQuestions: (id: number) => apiRequest<T.FormQuestionsResponse>(`/api/events/${id}/form-questions`),
   formLink: (id: number, formUrl: string) => apiRequest<T.FormLinkResponse>(`/api/events/${id}/form-link`, json('PUT', { formUrl })),
   notice: (id: number) => apiRequest<T.FinalNoticeResponse>(`/api/events/${id}/notice`),

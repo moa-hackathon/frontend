@@ -54,7 +54,7 @@ export function Dashboard({ onCreateEvent }: { onCreateEvent: (prompt: string) =
               ))}
             </ul>
           </div>
-          {!loading && !error && events.length === 0 && <p>아직 행사가 없어요. 첫 행사를 만들어 보세요.</p>}
+          {!loading && !error && events.length === 0 && <p>예정된 행사가 없어요. 이미 지난 행사는 목록에 표시되지 않아요.</p>}
           <div className="event-grid">
             {events.map((event) => (
               <a className={`glass-panel event-card event-card--${event.status}`} href={`#events/${event.id}`} key={event.id} aria-label={`${event.title} 대시보드 보기`}>
