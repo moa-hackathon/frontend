@@ -1,0 +1,9 @@
+.text-heading-1 { font: var(--font-heading-1); }
+.text-heading-2 { font: var(--font-heading-2); }
+.text-heading-3 { font: var(--font-heading-3); }
+.text-subtitle-1 { font: var(--font-subtitle-1); }
+.text-subtitle-2 { font: var(--font-subtitle-2); }
+.text-body-1 { font: var(--font-body-1); }
+.text-body-1-semibold { font: var(--font-body-1-semibold); }
+.text-body-2 { font: var(--font-body-2); }
+.text-body-2-semibold { font: var(--font-body-2-semibold); }

@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1280" height="759" viewBox="0 0 1280 759" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="bg-glow-2" d="M1280 0H0V759H1280V0Z" fill="url(#paint0_radial_0_30)"/>
+<defs>
+<radialGradient id="paint0_radial_0_30" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1203.2 166.98) scale(520 520)">
+<stop stop-color="#9DA6F5" stop-opacity="0.38"/>
+<stop offset="0.72" stop-color="#9DA6F5" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
